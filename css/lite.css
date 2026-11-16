@@ -1,0 +1,62 @@
+/* ============================================================
+   FoodCritic Lite — complemento ao style.css original
+   ============================================================ */
+
+/* Cardápio com miniatura */
+.menu-item-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--border);
+}
+.menu-item-row:last-child { border-bottom: none; }
+.menu-item-row strong { font-size: 15px; }
+.menu-item-row p { margin-top: 2px; font-size: 13px; }
+
+.menu-thumb {
+  width: 56px;
+  height: 56px;
+  border-radius: 8px;
+  object-fit: cover;
+  flex-shrink: 0;
+  background: var(--border);
+}
+
+.menu-item-price {
+  font-weight: 800;
+  color: var(--primary);
+  white-space: nowrap;
+}
+
+/* Perfil */
+.profile-badge {
+  display: inline-block;
+  margin-top: 6px;
+  padding: 4px 12px;
+  background: rgba(255, 90, 54, .1);
+  color: var(--primary);
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.upload-avatar-area {
+  border-radius: 50%;
+  overflow: hidden;
+  background: var(--border);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Ajustes gerais */
+.view-header { margin-bottom: 15px; }
+.feed-title-container { margin-bottom: 5px; }
+
+code {
+  background: #f0f0f0;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 12px;
+}
