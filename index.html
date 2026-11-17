@@ -3,8 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>FoodCritic Lite</title>
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,700&family=Nunito+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <meta name="theme-color" content="#ff5a36">
+  <title>FoodCritic Fácil</title>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,700&family=Nunito+Sans:wght@400;600;700;800;900&display=swap" rel="stylesheet">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/lite.css">
@@ -14,145 +15,45 @@
 
   <div id="app">
     <aside class="sidebar-left">
-      <h1 class="logo-sidebar">FoodCritic</h1>
+      <h1 class="logo-sidebar">FoodCritic Fácil</h1>
       <nav class="nav-menu">
-        <button class="nav-btn active" onclick="switchView('home', this)">
+        <button class="nav-btn active" data-nav="inicio" onclick="go('inicio')">
           <i class="fas fa-home"></i> <span>Início</span>
         </button>
-        <button class="nav-btn" onclick="switchView('explore', this)">
-          <i class="fas fa-list-ul"></i> <span>Explorar</span>
+        <button class="nav-btn" data-nav="carrinho" onclick="go('carrinho')">
+          <i class="fas fa-shopping-bag"></i> <span>Carrinho</span>
+          <b class="sidebar-badge" id="cart-badge-sidebar" hidden>0</b>
         </button>
-        <button class="nav-btn" onclick="switchView('profile', this)">
-          <i class="fas fa-user"></i> <span>Perfil</span>
+        <button class="nav-btn" data-nav="pedido" onclick="go('pedido')">
+          <i class="fas fa-receipt"></i> <span>Meu Pedido</span>
         </button>
       </nav>
-      <button class="btn-logout-sidebar" onclick="logout()">
-        <i class="fas fa-sign-out-alt"></i> <span>Sair</span>
-      </button>
     </aside>
 
     <main class="main-content">
-      <section id="view-home" class="view active">
-        <div class="mobile-header">
-          <h1 class="logo">FoodCritic Lite</h1>
-          <button class="btn-logout-mobile" onclick="logout()">
-            <i class="fas fa-sign-out-alt"></i>
-          </button>
-        </div>
-        <div class="feed-header">
-          <h2 id="greeting-text">Onde comer hoje?</h2>
-          <div class="search-container">
-            <i class="fas fa-search"></i>
-            <input type="text" id="search-input" placeholder="Buscar lojas ou pratos...">
-          </div>
-        </div>
-        <div class="feed-title-container"><h3 class="section-title">Lojas</h3></div>
-        <div id="home-list" class="restaurants-grid"></div>
-      </section>
-
-      <section id="view-explore" class="view">
-        <div class="mobile-header"><h1 class="logo">Explorar</h1></div>
-        <div class="view-header"><h2 class="section-title">Todas as lojas</h2></div>
-        <div class="filter-chips" id="category-filters"></div>
-        <div id="explore-list" class="restaurants-grid"></div>
-      </section>
-
-      <section id="view-profile" class="view">
-        <div class="mobile-header"><h1 class="logo">Perfil</h1></div>
-        <div class="profile-hero">
-          <div class="profile-hero-bg"></div>
-          <div class="profile-hero-content">
-            <div class="avatar-container">
-              <img id="profile-avatar" class="avatar"
-                   src="https://ui-avatars.com/api/?name=U&background=ff5a36&color=fff">
-            </div>
-            <h2 id="profile-name">Carregando...</h2>
-            <p id="profile-email" class="text-light"></p>
-            <p id="profile-role" class="profile-badge"></p>
-            <button class="btn-outline-sm" onclick="openEditProfileModal()">
-              <i class="fas fa-pen"></i> Editar perfil
-            </button>
-          </div>
-        </div>
-        <div class="profile-section">
-          <h3 class="section-title">Sobre</h3>
-          <p class="text-light">
-            <strong>FoodCritic Lite</strong> — catálogo de lojas e cardápios.
-            Diário, notas e fotos dependem de recursos que o projeto ainda
-            não possui.
-          </p>
-        </div>
-      </section>
+      <div id="view-content"></div>
     </main>
 
     <aside class="sidebar-right">
-      <div class="user-profile-card">
-        <img id="sidebar-avatar" class="avatar-small" style="width:56px;height:56px;"
-             src="https://ui-avatars.com/api/?name=U&background=ff5a36&color=fff">
-        <div class="user-info">
-          <strong id="sidebar-name">Usuário</strong>
-          <span id="sidebar-email" class="text-light">email@exemplo.com</span>
-        </div>
-      </div>
+      <div id="sidebar-right-content"></div>
     </aside>
   </div>
 
-  <nav class="bottom-nav">
-    <button class="nav-btn active" onclick="switchView('home', this)">
+  <nav class="bottom-nav bottom-nav-facil">
+    <button class="nav-btn active" data-nav="inicio" onclick="go('inicio')">
       <i class="fas fa-home"></i><span>Início</span>
     </button>
-    <button class="nav-btn" onclick="switchView('explore', this)">
-      <i class="fas fa-list-ul"></i><span>Explorar</span>
+    <button class="nav-btn" data-nav="carrinho" onclick="go('carrinho')">
+      <span class="nav-icon-wrap">
+        <i class="fas fa-shopping-bag"></i>
+        <b class="cart-badge" id="cart-badge-mobile" hidden>0</b>
+      </span>
+      <span>Meu Carrinho</span>
     </button>
-    <button class="nav-btn" onclick="switchView('profile', this)">
-      <i class="fas fa-user"></i><span>Perfil</span>
+    <button class="nav-btn" data-nav="pedido" onclick="go('pedido')">
+      <i class="fas fa-receipt"></i><span>Meu Pedido</span>
     </button>
   </nav>
-
-  <!-- Modal: loja -->
-  <div class="modal-overlay" id="store-modal">
-    <div class="modal">
-      <div class="modal-header">
-        <h2 id="store-modal-name">Loja</h2>
-        <button class="close-btn" onclick="closeModal('store-modal')">&times;</button>
-      </div>
-      <div class="modal-body">
-        <p class="text-light" id="store-modal-meta"></p>
-        <h3 class="section-title" style="margin-top:16px;">Cardápio</h3>
-        <div id="store-modal-menu"></div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Modal: editar perfil -->
-  <div class="modal-overlay" id="edit-profile-modal">
-    <div class="modal">
-      <div class="modal-header">
-        <h2>Editar perfil</h2>
-        <button class="close-btn" onclick="closeModal('edit-profile-modal')">&times;</button>
-      </div>
-      <div class="modal-body">
-        <div class="form-group text-center">
-          <label>Foto de perfil</label>
-          <label for="edit-avatar-file" class="upload-avatar-area"
-                 style="cursor:pointer;display:inline-block;margin:0 auto;">
-            <img id="edit-avatar-preview" class="avatar"
-                 style="width:90px;height:90px;object-fit:cover;" alt="Avatar">
-          </label>
-          <input type="file" id="edit-avatar-file" accept="image/*"
-                 onchange="previewAvatarFile(event)" style="display:none;">
-          <p class="text-light" style="font-size:12px;margin-top:6px;">
-            Clique na foto para trocar (opcional)
-          </p>
-        </div>
-        <div class="form-group">
-          <label>Seu nome</label>
-          <input type="text" id="edit-name-input" placeholder="Como quer ser chamado?">
-        </div>
-        <button class="btn-primary btn-block" onclick="saveProfile()">Salvar</button>
-      </div>
-    </div>
-  </div>
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="js/config.js"></script>
